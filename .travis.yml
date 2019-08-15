@@ -1,0 +1,20 @@
+sudo: require
+dist: bionic
+language: cpp
+compiler: gcc
+
+install: 
+  - sudo apt update -qq
+  # Codecov
+  - sudo pip install codecov
+
+script: 
+  - ./build.sh
+  - ./travis_qmake_gcc_cpp11_gcov
+  # Codecov
+  - ./get_code_cov.sh >/dev/null
+  - codecov >/dev/null
+
+after_success:
+  # Codecov
+  - bash <(curl -s https://codecov.io/bash)
