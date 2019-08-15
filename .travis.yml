@@ -1,6 +1,5 @@
-sudo: require
-dist: bionic
 language: cpp
+dist: bionic
 compiler: gcc
 
 install: 
