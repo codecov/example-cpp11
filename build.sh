@@ -1,3 +1,3 @@
 #!/bin/bash
-qmake qmake_gcc_cpp11_gcov.pro
+qmake -qt=qt5 qmake_gcc_cpp11_gcov.pro
 make
