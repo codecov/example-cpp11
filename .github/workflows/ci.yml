@@ -1,0 +1,23 @@
+name: Workflow for example-clojure
+on: [push, pull_request]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        run: |
+          sudo apt-get update -qq
+      - name: Run tests
+        run: |
+          ./build.sh
+          ./qmake_gcc_cpp11_gcov
+          ./get_code_cov.sh
+      - name: Upload to Codecov (Action)
+        uses: codecov/codecov-action@v2
+      - name: Upload to Codecov (Uploader)
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov

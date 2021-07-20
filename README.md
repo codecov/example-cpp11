@@ -1,10 +1,10 @@
 # [Codecov](https://codecov.io) qmake_gcc_cpp11_gcov Example
 
-[![codecov.io](https://codecov.io/github/richelbilderbeek/travis_qmake_gcc_cpp11_gcov/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/travis_qmake_gcc_cpp11_gcov?branch=master)
-[![Build Status](https://travis-ci.org/richelbilderbeek/travis_qmake_gcc_cpp11_gcov.svg?branch=master)](https://travis-ci.org/richelbilderbeek/travis_qmake_gcc_cpp11_gcov)
+[![codecov.io](https://codecov.io/github/codecov/example-cpp11/coverage.svg?branch=master)](https://codecov.io/github/codecov/example-cpp11?branch=master)
+[![Build Status](https://github.com/codecov/example-cpp11/actions/workflows/ci.yml/badge.svg)]
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcodecov%2Fexample-cpp11.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcodecov%2Fexample-cpp11?ref=badge_shield)
 
-The goal of this project is to have a clean Travis CI build, with specs:
+The goal of this project is to have a clean GitHub Actions CI build, with specs:
  * C++ version: `C++11`
  * Build system: `qmake`
  * C++ compiler: `g++`
@@ -13,18 +13,21 @@ The goal of this project is to have a clean Travis CI build, with specs:
  * Source: multiple files
 
 ## Guide
-### Travis Setup
-
-Add to your `.travis.yml` file.
+### GitHub Actions Step
+Add to your workflows file.
 ```yml
-language: cpp
-compiler: gcc
-script:
-  - ./build.sh
-  - ./travis_qmake_gcc_cpp11_gcov
-  - ./get_code_cov.sh # or how ever you get your coverage
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - name: Upload to Codecov (Action)
+    uses: codecov/codecov-action@v2
+    with:
+      token: {{ token }}
+```
+or
+```yml
+  - name: Upload to Codecov (Uploader)
+    run: |
+      curl -Os https://uploader.codecov.io/latest/linux/codecov
+      chmod +x codecov
+      ./codecov -t {{ token }}
 ```
 
 ### Produce Coverage Reports
