@@ -9,6 +9,7 @@ jobs:
       - name: Setup
         run: |
           sudo apt-get update -qq
+          sudo apt-get install qt5-qmake
       - name: Run tests
         run: |
           ./build.sh
